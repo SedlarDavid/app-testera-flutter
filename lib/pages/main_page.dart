@@ -10,6 +10,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -17,6 +18,10 @@ class MainPage extends StatelessWidget {
           TextButton(
             onPressed: () => control.toPowerManagement(context),
             child: Text('Power Management'),
+          ),
+          TextButton(
+            onPressed: () => control.toNotifications(context),
+            child: Text('Notifications'),
           ),
         ],
       ),
