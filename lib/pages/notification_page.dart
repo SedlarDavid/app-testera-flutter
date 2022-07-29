@@ -1,11 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class NotificationPage extends StatelessWidget {
+class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
 
   static MaterialPageRoute get route => MaterialPageRoute(
         builder: (context) => const NotificationPage(),
       );
+
+  @override
+  State<NotificationPage> createState() => _NotificationPageState();
+}
+
+class _NotificationPageState extends State<NotificationPage> {
+  late final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
+  @override
+  void initState() {
+    super.initState();
+
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    const initializationSettingsAndroid = AndroidInitializationSettings(
+      'ic_launcher',
+    );
+    final initializationSettingsIOS = IOSInitializationSettings(
+      onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+    );
+    final initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
+    flutterLocalNotificationsPlugin
+        .initialize(
+      initializationSettings,
+      onSelectNotification: selectNotification,
+    )
+        .then((_) {
+      ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+        const SnackBar(
+          content: Text('Initialized'),
+        ),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,5 +58,33 @@ class NotificationPage extends StatelessWidget {
     );
   }
 
-  void _sendNotification() {}
+  Future<void> _sendNotification() async {
+    const androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'testChannelId',
+      'testChannel',
+      channelDescription: 'testChannelDescription',
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
+    );
+    const NotificationDetails platformChannelSpecifics = NotificationDetails(
+      android: androidPlatformChannelSpecifics,
+    );
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      'plain title',
+      'plain body',
+      platformChannelSpecifics,
+      payload: 'item x',
+    );
+  }
+
+  void onDidReceiveLocalNotification(
+      int id, String? title, String? body, String? payload) {
+    debugPrint('$id $title $body $payload');
+  }
+
+  void selectNotification(String? payload) {
+    debugPrint(payload);
+  }
 }
