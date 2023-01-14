@@ -6,6 +6,8 @@ import 'package:testera/page_provider.dart';
 import 'package:testera/pages/main_page.dart';
 import 'package:testera/theme.dart';
 
+import 'controls/control_provider.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -21,10 +23,13 @@ class MyApp extends StatelessWidget {
       localization: LocalinoConfig(
         locales: LocalinoAsset.map(
           locales: [
-            'cs_CZ',
+            'cs_CZ.json',
           ],
         ),
       ),
+      initializers: {
+        ...ControlProvider.initializers,
+      },
       routes: [
         ...PageProvider.routes,
       ],

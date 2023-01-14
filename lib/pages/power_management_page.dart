@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_control/control.dart';
 
-class PowerManagementPage extends StatelessWidget {
- static MaterialPageRoute get route => MaterialPageRoute(
-        builder: (context) => const PowerManagementPage(),
-      );
+import '../controls/power_management_control.dart';
 
-  const PowerManagementPage({Key? key}) : super(key: key);
+class PowerManagementPage extends SingleControlWidget<PowerManagementControl>
+    with RouteControl {
+  PowerManagementPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

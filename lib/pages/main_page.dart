@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_control/control.dart';
+import 'package:testera/page_provider.dart';
 
 import '../controls/main_control.dart';
 
-class MainPage extends StatelessWidget {
-  final control = MainControl();
-
+class MainPage extends SingleControlWidget<MainControl> with RouteControl {
   MainPage({Key? key}) : super(key: key);
+
+  @override
+  MainControl get control => MainControl();
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +19,11 @@ class MainPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           TextButton(
-            onPressed: () => control.toPowerManagement(context),
+            onPressed: () => routeOf<PowerManagementPage>()?.openRoute(),
             child: Text('Power Management'),
           ),
           TextButton(
-            onPressed: () => control.toNotifications(context),
+            onPressed: () => routeOf<NotificationPage>()?.openRoute(),
             child: Text('Notifications'),
           ),
         ],
