@@ -26,6 +26,10 @@ class MainPage extends SingleControlWidget<MainControl> with RouteControl {
             onPressed: () => routeOf<NotificationPage>()?.openRoute(),
             child: Text(localize("notifications")),
           ),
+          TextButton(
+            onPressed: () => routeOf<FlutterControlPage>()?.openRoute(),
+            child: Text(localize("flutter_control")),
+          ),
         ],
       ),
     );
