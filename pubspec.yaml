@@ -29,11 +29,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  intl: ^0.17.0
 
   flutter_screen_wake: ^1.0.2
 
   flutter_local_notifications: ^13.0.0
 
+  flutter_control: ^2.6.0
 
 dev_dependencies:
   flutter_test:
