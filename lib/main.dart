@@ -21,12 +21,13 @@ class MyApp extends StatelessWidget {
     return ControlRoot(
       debug: !kReleaseMode,
       localization: LocalinoConfig(
-        locales: LocalinoAsset.map(
-          locales: [
-            'cs_CZ.json',
-          ],
-        ),
-      ),
+          locales: LocalinoAsset.map(
+            locales: [
+              'cs_CZ',
+              'en_US',
+            ],
+          ),
+          defaultLocale: 'en_US'),
       initializers: {
         ...ControlProvider.initializers,
       },

@@ -20,11 +20,11 @@ class MainPage extends SingleControlWidget<MainControl> with RouteControl {
         children: [
           TextButton(
             onPressed: () => routeOf<PowerManagementPage>()?.openRoute(),
-            child: Text('Power Management'),
+            child: Text(localize('power_management')),
           ),
           TextButton(
             onPressed: () => routeOf<NotificationPage>()?.openRoute(),
-            child: Text('Notifications'),
+            child: Text(localize("notifications")),
           ),
         ],
       ),
