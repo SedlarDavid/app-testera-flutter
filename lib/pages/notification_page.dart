@@ -23,7 +23,7 @@ class _NotificationPageState extends State<NotificationPage> {
     const initializationSettingsAndroid = AndroidInitializationSettings(
       'ic_launcher',
     );
-    final initializationSettingsIOS = IOSInitializationSettings(
+    final initializationSettingsIOS = DarwinInitializationSettings(
       onDidReceiveLocalNotification: onDidReceiveLocalNotification,
     );
     final initializationSettings = InitializationSettings(
@@ -33,7 +33,7 @@ class _NotificationPageState extends State<NotificationPage> {
     flutterLocalNotificationsPlugin
         .initialize(
       initializationSettings,
-      onSelectNotification: selectNotification,
+      onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
     )
         .then((_) {
       ScaffoldMessenger.maybeOf(context)?.showSnackBar(
@@ -84,7 +84,7 @@ class _NotificationPageState extends State<NotificationPage> {
     debugPrint('$id $title $body $payload');
   }
 
-  void selectNotification(String? payload) {
-    debugPrint(payload);
+  void onDidReceiveNotificationResponse(NotificationResponse details) {
+    debugPrint(details.payload);
   }
 }
